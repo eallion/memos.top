@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/assets/img/logo.webp" type="image/*" />
+    <link href="https://cdn.staticfile.org/pure/3.0.0/pure.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.staticfile.org/github-markdown-css/5.1.0/github-markdown.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.staticfile.org/baguettebox.js/1.11.1/baguetteBox.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css">
+    <title>Memos Top</title>
+
+</head>
+
+<body>
+    <header>
+        <div class="pure-menu pure-menu-horizontal">
+            <a href="#" class="pure-menu-heading pure-menu-link">Memos</a>
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item">
+                    <a href="https://github.com/eallion/memos.top" target="_blank" rel="noopener noreferrer" class="pure-menu-link">GitHub</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a href="https://eallion.com/memos" target="_blank" rel="noopener noreferrer" class="pure-menu-link">I'm Feeling Lucky</a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </header>
+
+    <section id="main" class="markdown-body">
+        <h1>Memos Top</h1>
+
+        <blockquote>
+            <p>Je <del>memos</del>, donc je suis - <em>René Descartes fans</em></p>
+        </blockquote>
+
+        <div class="total">Total <span id="total">0</span> Memos 🎉</div>
+
+        <div id="memos" class="memos">
+            <!-- Memos Container -->
+        </div>
+
+    </section>
+
+    <footer class="markdown-body footer">
+        <p>Copyright @
+            <script>
+                document.write(new Date().getFullYear())
+            </script><a href="https://eallion.com/" target="_blank" rel="noopener noreferrer" class="hidden">Charles
+                'eallion' Chin</a> All Rights Reserved.
+        </p>
+
+    </footer>
+
+    <!-- 修改自己的 Memos 设置 -->
+    <script type="text/javascript">
+        var memos = {
+            host: 'https://demo.usememos.com/',  //修改为自己部署 Memos 的网址，末尾有 / 斜杠
+            limit: '10',  //默认每次显示 10条
+            creatorId: '101',  //默认为 101用户 https://demo.usememos.com/u/101
+            domId: '#memos',  //默认为 #memos
+            username: 'memos',  //发布者 ID 自定义
+            name: 'Official Demo',  //发布者全称自定义
+        }
+
+    </script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/vanilla-lazyload/17.8.3/lazyload.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/marked/4.2.2/marked.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/pangu/4.0.7/pangu.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/moment.js/2.29.4/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/baguettebox.js/1.11.1/baguetteBox.min.js"></script>
+    <script type="text/javascript" src="assets/js/moment.twitter.js"></script>
+    <script type="text/javascript" src="assets/js/main.js"></script>
+    <script type="text/javascript" src="assets/js/custom.js"></script>
+
+</body>
+
+</html>
