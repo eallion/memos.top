@@ -1,6 +1,7 @@
 <p align="center"><a href="https://usememos.com"><img height="64px" src="https://raw.githubusercontent.com/eallion/memos.top/main/assets/img/logo-full.webp" alt="✍️ memos" /></a></p>
 
 <p align="center">Memos Top. A static page rendered with the Memos API.</p>
+<p align="center">Simple HTML, Pure CSS, Vanilla JS. Anti-Framework.</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Memos-Top-orange" />
@@ -21,18 +22,15 @@ English | [中文](./README_cn.md)
 
 ### WebStack
 
-> Darkmode Support  
-> Mobile Friendly  
+> • Darkmode Support  
+> • Mobile Friendly  
 
- - [**Memos**](https://github.com/usememos/memos)
- - [BaguetteBox.js](https://github.com/feimosi/baguetteBox.js)
- - [Github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
- - [Markedjs](https://github.com/markedjs/marked)
- - [Moment](https://github.com/moment/moment)
- - [Pangu.js](https://github.com/vinta/pangu.js)
- - [Pure.CSS](https://purecss.io/)
- - [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
- - [Vercel](https://vercel.com)
+- [**Memos**](https://github.com/usememos/memos)
+- [Markedjs](https://github.com/markedjs/marked)
+- [Moment](https://github.com/moment/moment)
+- [Pure.CSS](https://purecss.io/)
+- [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
+- [ViewImage.js](https://github.com/Tokinx/ViewImage)
 
 ### Usage
 
@@ -63,8 +61,9 @@ Replace the default value in `index.html`:
 3. Logo & Avatar(*Option*)
 
 Replace the Logo and Avatar in the `assets/img` folder.
- - `logo.webp` is favicon
- - `avatar.jpg` is your icon
+
+- `logo.webp` is favicon
+- `avatar.jpg` is your icon
 
 4. Upload
 
@@ -74,7 +73,7 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 
 > Demo: <https://www.memos.top>
 
-1. Fork this 
+1. Fork this
 2. Setting as #[Usage.2]()
 3. Go to your own `memos.top` repo - `Setting` - `Pages` - `Deploy from a branch` - `Branch(main/root)`
 
@@ -82,7 +81,7 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 
 > Demo: <https://memos.top>
 
-1. Fork this 
+1. Fork this
 2. Setting as #[Usage.2]()
 3. Go to your Vercel dash
 4. Import GitHub repo
@@ -95,6 +94,7 @@ Memos Top won't update unless the Memos API update.
 So, you need to update or fix yourself.
 
 ### [LICENSE](https://github.com/me-shaon/GLWTPL)
+
 ```
 GLWT（Good Luck With That，祝你好运）公共许可证
 版权所有© 每个人，除了作者

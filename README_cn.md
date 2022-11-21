@@ -1,6 +1,7 @@
 <p align="center"><a href="https://usememos.com"><img height="64px" src="https://raw.githubusercontent.com/eallion/memos.top/main/assets/img/logo-full.webp" alt="✍️ memos" /></a></p>
 
 <p align="center">Memos Top. 通过 Memos API 渲染的静态网页.</p>
+<p align="center">简单的 HTML、纯净的 CSS、原生的 JS。反框架设计。</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Memos-Top-orange" />
@@ -21,18 +22,15 @@
 
 ### 前端框架
 
-> 暗黑模式自适应  
-> 移动端自适应  
+> • 暗黑模式适配  
+> • 移动端自适应  
 
- - [**Memos**](https://github.com/usememos/memos)
- - [BaguetteBox.js](https://github.com/feimosi/baguetteBox.js)
- - [Github-markdown-css](https://github.com/sindresorhus/github-markdown-css)
- - [Markedjs](https://github.com/markedjs/marked)
- - [Moment](https://github.com/moment/moment)
- - [Pangu.js](https://github.com/vinta/pangu.js)
- - [Pure.CSS](https://purecss.io/)
- - [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
- - [Vercel](https://vercel.com)
+- [**Memos**](https://github.com/usememos/memos)
+- [Markedjs](https://github.com/markedjs/marked)
+- [Moment](https://github.com/moment/moment)
+- [Pure.CSS](https://purecss.io/)
+- [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
+- [ViewImage.js](https://github.com/Tokinx/ViewImage)
 
 ### 使用方法
 
@@ -63,8 +61,9 @@ git clone https://github.com/eallion/memos.top
 3. 网站图标和头像(*可选*)
 
  在 `assets/img` 目录中，替换成自己的图标和头像。
- - `logo.webp` 是网站图标，显示在浏览器标签上。
- - `avatar.jpg` 是头像，显示在每条 Memos 的左侧。
+
+- `logo.webp` 是网站图标，显示在浏览器标签上。
+- `avatar.jpg` 是头像，显示在每条 Memos 的左侧。
 
 4. 上传
 
@@ -82,7 +81,7 @@ git clone https://github.com/eallion/memos.top
 
 > Demo: <https://memos.top>
 
-1. Fork 本仓库 
+1. Fork 本仓库
 2. 按照 #[使用方法.2]() 设置自己的 API
 3. 进入自己的 Vercel 面板
 4. 新建一个 Project ，导入 GitHub 上的仓库
@@ -94,6 +93,7 @@ git clone https://github.com/eallion/memos.top
 一般情况下不会更新，除非上游 Memos 有大的改动。一些简单的 Bug 自己调整一下就可以了。
 
 ### [许可证](https://github.com/me-shaon/GLWTPL)
+
 ```
 GLWT（Good Luck With That，祝你好运）公共许可证
 版权所有© 每个人，除了作者

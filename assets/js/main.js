@@ -117,102 +117,64 @@ function getNextList() {
 }
 // 插入 html
 function updateHTMl(data) {
-  var memoResult = "",
-    resultAll = "";
+  var memoResult = "", resultAll = "";
 
-  for (var i = 0; i < data.length; i++) {
+  const TAG_REG = /#([^\s#]+?) /g;
+  const B23_REG = /<a href="https:\/\/b23\.tv\/([a-z|A-Z|0-9]{7})\/">.*<\/a>/g;
+  const BILIBILI_REG = /<a\shref="https:\/\/www\.bilibili\.com\/video\/((av[\d]{1,10})|(BV([\w]{10})))\/?">.*<\/a>/g;
+  const YOUTUBE_REG = /<a href="https:\/\/www\.youtube\.com\/watch\?v\=([a-z|A-Z|0-9]{11})\">.*<\/a>/g;
+
     // Marked Options
     marked.setOptions({
       breaks: true,
       smartypants: true,
       langPrefix: 'language-'
-    });
-    // Marked Image 官方文档 https://marked.js.org/using_pro#renderer
-    const renderer = {
-      image(href, title, text) {
-        return `
-                  <div class="gallery">
-                      <a href="${href}"><img loading="lazy" class="img" src="${href}" alt="${text}"></a>
-                  </div>`;
-      } // 为了图片加灯箱效果
-    };
-    // Custom Extensions 查找 Tags 并自定义样式的例子， 自己可参照写其他规则
-    const tagReg = {
-      name: 'tagReg',
-      level: 'inline',
-      start(src) { return src.match(/#/)?.index; },
-      tokenizer(src, tokens) {
-        const rule = /#([^\s#]+?) /;
-        const match = rule.exec(src);
-        if (match) {
-          return {
-            type: 'tagReg',
-            raw: match[0],
-            tagReg: this.lexer.inlineTokens(match[1].trim()),
+  });
 
-          };
+    // Memos Content
+    for (var i = 0; i < data.length; i++) {
+      var memoContREG = data[i].content
+          .replace(TAG_REG, "<span class='tag-span'><a target='_blank' rel='noopener noreferrer' href='https://memos.eallion.com/u/101?tag=$1'>#$1</a></span> ")
+
+      memoContREG = marked.parse(memoContREG)
+          .replace(BILIBILI_REG, "<div class='video-wrapper'><iframe src='//player.bilibili.com/player.html?bvid=$1&as_wide=1&high_quality=1&danmaku=0' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true' style='position:absolute;height:100%;width:100%;'></iframe></div>")
+          .replace(YOUTUBE_REG, "<div class='video-wrapper'><iframe src='https://www.youtube.com/embed/$1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen title='YouTube Video'></iframe></div>")
+
+      //解析内置资源文件 
+      if (data[i].resourceList && data[i].resourceList.length > 0) {
+            var resourceList = data[i].resourceList;
+            var imgUrl = '', resUrl = '', resImgLength = 0;
+            for (var j = 0; j < resourceList.length; j++) {
+                var resType = resourceList[j].type.slice(0, 5);
+                if (resType == 'image') {
+                    imgUrl += '<img loading="lazy" src="' + memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename + '"/>'
+                    resImgLength = resImgLength + 1
+                }
+                if (resType !== 'image') {
+                    resUrl += '<a target="_blank" rel="noreferrer" href="' + memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename + '">' + resourceList[j].filename + '</a>'
+                }
+            }
+            if (imgUrl) {
+                var resImgGrid = ""
+                if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
+                memoContREG += '<div class="resimg ' + resImgGrid + '">' + imgUrl + '</div></div>'
+            }
+            if (resUrl) {
+                memoContREG += '<p class="datasource">' + resUrl + '</p>'
+            }
         }
-      },
-      renderer(token) {
-        return `<span class="tag-span">#${this.parser.parseInline(token.tagReg)}</span> `;
-      }
-    };
-
-    // Custom Extensions
-    marked.use({ extensions: [tagReg] });
-    marked.use({ renderer });
-
-    // 正常版本
-    // var memoContREG = marked.parse(data[i].content)
-
-    // 引用 Pangu JS 增强中文排版的版本
-    var memoContREG = marked.parse(pangu.spacing(data[i].content))
-
-    //解析内置资源文件
-    if (data[i].resourceList && data[i].resourceList.length > 0) {
-      var resourceList = data[i].resourceList;
-      var imgUrl = '',
-        resUrl = '',
-        resImgLength = 0;
-      for (var j = 0; j < resourceList.length; j++) {
-        var restype = resourceList[j].type.slice(0, 5);
-        if (restype == 'image') {
-          imgUrl += '<a href="' + memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename + ' "><img class="img thumbnail-image" src="' + memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename + '"/></a>'
-          resImgLength = resImgLength + 1
-        }
-        if (restype !== 'image') {
-          resUrl += '<a href="' + memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename + '" target="_blank" download="' + resourceList[j].filename + '">' + resourceList[j].filename + '</a>'
-        }
-      }
-      if (imgUrl) {
-        var resImgGrid = ""
-        if (resImgLength !== 1) {
-          var resImgGrid = "grid grid-" + resImgLength
-        }
-        memoContREG += '<div class="gallery ' + resImgGrid + '">' + imgUrl + '</div>'
-      }
-      if (resUrl) {
-        memoContREG += '<p class="datasource">' + resUrl + '</p>'
-      }
+        memoResult += '<li class="timeline"><div class="memos__content"><div class="memos__text"><div class="memos__userinfo"><div>' + memo.name + '</div><div><svg viewBox="0 0 24 24" aria-label="认证账号" class="memos__verify"><g><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path></g></svg></div><div class="memos__id">@' + memo.username + '</div></div><p>' + memoContREG + '</p></div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createdTs * 1000).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
     }
-    memoResult += '<li class="timeline"><div class="memos__content"><div class="memos__text"><div class="memos__userinfo"><div>' + memo.name + '</div><div><svg viewBox="0 0 24 24" aria-label="认证账号" class="memos__verify"><g><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path></g></svg></div><div class="memos__id">@' + memo.username + '</div></div><p>' + memoContREG + '</p></div><div class="memos__meta"><small class="memos__date">' + moment(data[i].createdTs * 1000).twitter() + ' • 来自「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
-  } // end for
   var memoBefore = '<ul class="">'
   var memoAfter = '</ul>'
   resultAll = memoBefore + memoResult + memoAfter
   memoDom.insertAdjacentHTML('beforeend', resultAll);
   document.querySelector('button.button-load').textContent = '加载更多';
-  //图片灯箱
-  // baguetteBox 灯箱 Issue: #190 Ajax 需要先销毁实例再初始化
-  baguetteBox.run('.gallery', {
-    // Custom options
-    buttons: false,
-    noScrollbars: true,
-    fullScreen: false,
-    filter: /.*/i
-  });
 }
 // Memos End
+
+// 图片灯箱效果
+window.ViewImage && ViewImage.init('.container img');
 
 // Memos Total Start
 //获取 Memos 总条数
@@ -229,3 +191,35 @@ function getTotal() {
 };
 window.onload = getTotal();
 // Memos Total End
+
+// Toggle theme
+const localTheme = window.localStorage && window.localStorage.getItem("theme");
+const themeToggle = document.querySelector(".theme-toggle");
+
+if (localTheme) {
+  document.body.classList.remove("light-theme", "dark-theme");
+  document.body.classList.add(localTheme);
+}
+
+themeToggle.addEventListener("click", () => {
+  const themeUndefined = !new RegExp("(dark|light)-theme").test(document.body.className);
+  const isOSDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (themeUndefined) {
+    if (isOSDark) {
+      document.body.classList.add("light-theme");
+    } else {
+      document.body.classList.add("dark-theme");
+    }
+  } else {
+    document.body.classList.toggle("light-theme");
+    document.body.classList.toggle("dark-theme");
+  }
+
+  window.localStorage &&
+    window.localStorage.setItem(
+      "theme",
+      document.body.classList.contains("dark-theme") ? "dark-theme" : "light-theme",
+    );
+});
+// Darkmode End
