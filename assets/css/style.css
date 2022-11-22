@@ -86,7 +86,7 @@ header {
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-    margin: 0 1rem;
+    margin: 0;
 }
 
 .title {
@@ -158,6 +158,7 @@ blockquote {
     margin-left: 50px;
     position: relative;
     max-width: 100%;
+    width: 100%;
 }
 
 .memos__content:before {
@@ -298,6 +299,12 @@ blockquote {
 }
 
 @media (max-width: 683px) {
+
+    .menu,
+    .title {
+        font-size: 1rem;
+    }
+
     .memos__content {
         margin-left: 0;
     }

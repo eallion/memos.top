@@ -134,7 +134,7 @@ function updateHTMl(data) {
     // Memos Content
     for (var i = 0; i < data.length; i++) {
       var memoContREG = data[i].content
-          .replace(TAG_REG, "<span class='tag-span'><a target='_blank' rel='noopener noreferrer' href='https://memos.eallion.com/u/101?tag=$1'>#$1</a></span> ")
+          .replace(TAG_REG, "<span class='tag-span'><a rel='noopener noreferrer' href='#'>#$1</a></span> ")
 
       memoContREG = marked.parse(memoContREG)
           .replace(BILIBILI_REG, "<div class='video-wrapper'><iframe src='//player.bilibili.com/player.html?bvid=$1&as_wide=1&high_quality=1&danmaku=0' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true' style='position:absolute;height:100%;width:100%;'></iframe></div>")
@@ -157,7 +157,7 @@ function updateHTMl(data) {
             if (imgUrl) {
                 var resImgGrid = ""
                 if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
-                memoContREG += '<div class="resimg ' + resImgGrid + '">' + imgUrl + '</div></div>'
+                memoContREG += '<div class="resimg ' + resImgGrid + '">' + imgUrl + '</div>'
             }
             if (resUrl) {
                 memoContREG += '<p class="datasource">' + resUrl + '</p>'

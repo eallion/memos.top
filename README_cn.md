@@ -28,7 +28,6 @@
 - [**Memos**](https://github.com/usememos/memos)
 - [Markedjs](https://github.com/markedjs/marked)
 - [Moment](https://github.com/moment/moment)
-- [Pure.CSS](https://purecss.io/)
 - [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
 - [ViewImage.js](https://github.com/Tokinx/ViewImage)
 
