@@ -26,6 +26,7 @@ English | [中文](./README_cn.md)
 > • Mobile Friendly  
 
 - [**Memos**](https://github.com/usememos/memos)
+- [Highlight.js](https://github.com/highlightjs/highlight.js)
 - [Markedjs](https://github.com/markedjs/marked)
 - [Moment](https://github.com/moment/moment)
 - [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
@@ -86,6 +87,51 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 4. Import GitHub repo
 5. Configure Project default
 6. Deploy
+
+### Tips
+
+How to post your memos:
+
+1. Bilibili. Just URL. `BV/AV` support. `b23.tv` not support.
+```
+https://www.bilibili.com/video/BV1Sd4y1b7yg/ 
+```
+
+2. Youtube. Just URL.
+```
+https://www.youtube.com/watch?v=mNK6h1dfy2o
+```
+
+3. Youku. Just URL.
+```
+https://v.youku.com/v_show/id_XNTkyMjkxNTEyOA==.html
+```
+
+4. QQ Video. Just URL.
+```
+https://v.qq.com/x/cover/mzc00200z47sdeu/m0044zpag6c.html
+```
+
+5. Spotify. Share URL. `track/album` support.
+```
+https://open.spotify.com/track/6Uq8BnOxvXJsQiJ2XqfO5P
+```
+
+6. Netease music. Just URL.
+```
+https://music.163.com/#/song?id=4153490
+```
+
+7. QQ music. Support `sondmid` only, not `songid`.
+```
+https://y.qq.com/n/ryqq/songDetail/004W3BfK46dMXk
+```
+
+8. Douban. Just URL. Need your own API.
+```
+https://book.douban.com/subject/2567698/
+https://movie.douban.com/subject/1889243/
+```
 
 ### Update
 
