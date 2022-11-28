@@ -319,11 +319,13 @@ blockquote {
     border: 1px solid var(--color-img-border);
 }
 
-.tag-span {
+.tag-span,
+.total a {
     color: var(--color-tag);
 }
 
-.tag-span:hover {
+.tag-span:hover,
+.total a:hover {
     color: var(--color-tag-hover);
 }
 
