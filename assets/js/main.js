@@ -208,7 +208,7 @@ function updateHTMl(data) {
 // 解析豆瓣必须要API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
 // 已内置样式，修改 API 即可使用
 function fetchDB() {
-    var dbAPI = "https://api.eallion.com/";  // 修改为自己的 API
+    var dbAPI = "https://api.eallion.com/douban/";  // 修改为自己的 API
     var dbA = document.querySelectorAll(".timeline a[href*='douban.com/subject/']:not([rel='noreferrer'])") || '';
     if (dbA) {
         for (var i = 0; i < dbA.length; i++) {
@@ -289,7 +289,7 @@ function getTotal() {
         // Do something for an error here
     });
 };
-window.onload = getTotal();
+//window.onload = getTotal();
 // Memos Total End
 
 // Toggle Darkmode
