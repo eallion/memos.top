@@ -137,6 +137,10 @@ blockquote {
     padding-top: 40px;
 }
 
+.theme-toggle {
+    cursor: pointer;
+}
+
 .total {
     text-align: left;
 }
