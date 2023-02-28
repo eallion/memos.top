@@ -142,7 +142,7 @@ function updateHTMl(data) {
         breaks: true,
         smartypants: true,
         langPrefix: 'language-',
-        highlight: function(code, lang) {
+        highlight: function (code, lang) {
             const language = hljs.getLanguage(lang) ? lang : 'plaintext';
             return hljs.highlight(code, { language }).value;
         },
@@ -279,12 +279,13 @@ window.ViewImage && ViewImage.init('.container img');
 // Memos Total Start
 // Get Memos total count
 function getTotal() {
-    var totalUrl = memos + "api/memo/amount?creatorId=" + memo.creatorId
-    fetch(totalUrl).then(response => {
-        return response.json();
-    }).then(data => {
-        var memosCount = document.getElementById('total');
-        memosCount.innerHTML = data.data;
+    var totalUrl = memos + "api/memo/stats?creatorId=" + memo.creatorId
+    fetch(totalUrl).then(res => res.json()).then(resdata => {
+        if (resdata.data) {
+            var allnums = resdata.data.length
+            var memosCount = document.getElementById('total');
+            memosCount.innerHTML = allnums;
+        }
     }).catch(err => {
         // Do something for an error here
     });
