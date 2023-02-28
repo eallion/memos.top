@@ -6,7 +6,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Memos-Top-orange" />
   <img src="https://img.shields.io/badge/Author-eallion-brightgreen" />
-  <a href="https://github.com/eallion/memos.top/releases" target="_blank"><img alt="GitHub all releases" src="https://img.shields.io/github/downloads/eallion/memos.top/total"></a>
 </p>
 
 <p align="center">
@@ -26,7 +25,7 @@
 > • 移动端自适应  
 
 - [**Memos**](https://github.com/usememos/memos)
-- [Highlight.js](https://github.com/highlightjs/highlight.js) 
+- [Highlight.js](https://github.com/highlightjs/highlight.js)
 - [Markedjs](https://github.com/markedjs/marked)
 - [Moment](https://github.com/moment/moment)
 - [Vanilla-lazyload](https://github.com/verlok/vanilla-lazyload)
@@ -34,7 +33,7 @@
 
 ### 使用方法
 
-1. 从 [Release](https://github.com/eallion/memos.top/releases) 页面下载，或者`clone`本仓库：
+1. `clone`本仓库或[下载](https://github.com/eallion/memos.top/archive/refs/heads/main.zip)后部署 ：
 
 ```bash
 git clone https://github.com/eallion/memos.top
@@ -93,49 +92,55 @@ git clone https://github.com/eallion/memos.top
 发布 Memos 时的格式：
 
 1. Bilibili 视频。分享的视频链接。支持`BV/AV`号。暂不支持`b23.tv`链接。
+
 ```
 https://www.bilibili.com/video/BV1Sd4y1b7yg/ 
 ```
 
 2. Youtube 视频。分享的视频链接。
+
 ```
 https://www.youtube.com/watch?v=mNK6h1dfy2o
 ```
 
 3. Youku 视频。分享的视频链接。
+
 ```
 https://v.youku.com/v_show/id_XNTkyMjkxNTEyOA==.html
 ```
 
 4. 腾讯视频。分享的视频链接。
+
 ```
 https://v.qq.com/x/cover/mzc00200z47sdeu/m0044zpag6c.html
 ```
 
 5. Spotify 音乐。分享的链接。支持`track/album`。
+
 ```
 https://open.spotify.com/track/6Uq8BnOxvXJsQiJ2XqfO5P
 ```
 
 6. 网易云音乐。链接即可。
+
 ```
 https://music.163.com/#/song?id=4153490
 ```
 
 7. QQ 音乐。只支持 `sondmid` 不支持 `songid`。
+
 ```
 https://y.qq.com/n/ryqq/songDetail/004W3BfK46dMXk
 ```
 
 8. 豆瓣。链接即可。需要自己的 API。
+
+> 如果要启动解析豆瓣功能，需要取消注释 [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201) 然后替换成可用的 API [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201)，这两行位于： [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
+
 ```
 https://book.douban.com/subject/2567698/
 https://movie.douban.com/subject/1889243/
 ```
-
-### 关于更新
-
-一般情况下不会更新，除非上游 Memos 有大的改动。一些简单的 Bug 自己调整一下就可以了。
 
 ### [许可证](https://github.com/me-shaon/GLWTPL)
 
