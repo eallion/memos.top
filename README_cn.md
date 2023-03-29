@@ -46,12 +46,12 @@ git clone https://github.com/eallion/memos.top
 ```html
     <script type="text/javascript">
         var memos = {
-            host: 'https://demo.usememos.com/',  //修改为自己部署 Memos 的网址，末尾有 / 斜杠
-            limit: '10',  //默认每次显示 10条
-            creatorId: '101',  //默认为 101用户 https://demo.usememos.com/u/101
-            domId: '#memos',  //默认为 #memos
-            username: 'memos',  //发布者 ID 自定义
-            name: 'Official Demo',  //发布者全称自定义
+            host: 'https://demo.usememos.com/',  // 修改为自己部署 Memos 的网址，末尾有 / 斜杠。
+            limit: '10',  // 每页显示的条数，默认显示 10 条。
+            creatorId: '1',  // 老的实例是 101，新的实例是1。 https://demo.usememos.com/u/1
+            domId: '#memos',  // 默认为 #memos ，一般不用修改。
+            username: 'memos',  // 自定义显示在前端的 ID。
+            name: 'Official Demo',  // 自定义显示在前端的全名。
         }
 
     </script>

@@ -46,12 +46,12 @@ Replace the default value in `index.html`:
 ```html
     <script type="text/javascript">
         var memos = {
-            host: 'https://demo.usememos.com/',  //修改为自己部署 Memos 的网址，末尾有 / 斜杠
-            limit: '10',  //默认每次显示 10条
-            creatorId: '101',  //默认为 101用户 https://demo.usememos.com/u/101
-            domId: '#memos',  //默认为 #memos
-            username: 'memos',  //发布者 ID 自定义
-            name: 'Official Demo',  //发布者全称自定义
+            host: 'https://demo.usememos.com/',  // Your Memos, with '/' end.
+            limit: '10',  // Pagination to show.
+            creatorId: '1',  // The old instance is 101, and the new instance is 1. 
+            domId: '#memos',  // Default #memos.
+            username: 'memos',  // You can customize the display ID that is not related to memos.
+            name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
         }
 
     </script>
