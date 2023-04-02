@@ -21,8 +21,8 @@ English | [中文](./README_cn.md)
 
 ### WebStack
 
-> • Darkmode Support  
-> • Mobile Friendly  
+> • Darkmode Support
+> • Mobile Friendly
 
 - [**Memos**](https://github.com/usememos/memos)
 - [Highlight.js](https://github.com/highlightjs/highlight.js)
@@ -48,7 +48,7 @@ Replace the default value in `index.html`:
         var memos = {
             host: 'https://demo.usememos.com/',  // Your Memos, with '/' end.
             limit: '10',  // Pagination to show.
-            creatorId: '1',  // The old instance is 101, and the new instance is 1. 
+            creatorId: '1',  // The old instance is 101, and the new instance is 1.
             domId: '#memos',  // Default #memos.
             username: 'memos',  // You can customize the display ID that is not related to memos.
             name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
@@ -94,7 +94,7 @@ How to post your memos:
 1. Bilibili. Just URL. `BV/AV` support. `b23.tv` not support.
 
 ```
-https://www.bilibili.com/video/BV1Sd4y1b7yg/ 
+https://www.bilibili.com/video/BV1Sd4y1b7yg/
 ```
 
 2. Youtube. Just URL.
@@ -135,7 +135,7 @@ https://y.qq.com/n/ryqq/songDetail/004W3BfK46dMXk
 
 8. Douban. Just URL. Need your own API.
 
-> If enable. You need to uncomment [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201) and replace api [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201) in [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
+> If enable. You need to uncomment [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L208) and replace api [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L218) in [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
 
 ```
 https://book.douban.com/subject/2567698/

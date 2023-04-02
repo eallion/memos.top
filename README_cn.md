@@ -21,8 +21,8 @@
 
 ### 前端框架
 
-> • 暗黑模式适配  
-> • 移动端自适应  
+> • 暗黑模式适配
+> • 移动端自适应
 
 - [**Memos**](https://github.com/usememos/memos)
 - [Highlight.js](https://github.com/highlightjs/highlight.js)
@@ -94,7 +94,7 @@ git clone https://github.com/eallion/memos.top
 1. Bilibili 视频。分享的视频链接。支持`BV/AV`号。暂不支持`b23.tv`链接。
 
 ```
-https://www.bilibili.com/video/BV1Sd4y1b7yg/ 
+https://www.bilibili.com/video/BV1Sd4y1b7yg/
 ```
 
 2. Youtube 视频。分享的视频链接。
@@ -135,7 +135,7 @@ https://y.qq.com/n/ryqq/songDetail/004W3BfK46dMXk
 
 8. 豆瓣。链接即可。需要自己的 API。
 
-> 如果要启动解析豆瓣功能，需要取消注释 [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201) 然后替换成可用的 API [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L201)，这两行位于： [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
+> 如果要启动解析豆瓣功能，需要取消注释 [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L208) 然后替换成可用的 API [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L218)，这两行位于： [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
 
 ```
 https://book.douban.com/subject/2567698/
