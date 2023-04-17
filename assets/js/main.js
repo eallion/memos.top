@@ -70,17 +70,22 @@ var page = 1,
     offset = 0,
     nextLength = 0,
     nextDom = '';
+var tag='';
+var btnRemove = 0
 var memoDom = document.querySelector(memo.domId);
 var load = '<button class="load-btn button-load">努力加载中……</button>'
 if (memoDom) {
     memoDom.insertAdjacentHTML('afterend', load);
     getFirstList() // 首次加载数据
+	// 添加 button 事件监听器
+	btnRemove = 0;
     var btn = document.querySelector("button.button-load");
     btn.addEventListener("click", function () {
         btn.textContent = '努力加载中……';
         updateHTMl(nextDom)
         if (nextLength < limit) { // 返回数据条数小于限制条数，隐藏
             document.querySelector("button.button-load").remove()
+			btnRemove = 1
             return
         }
         getNextList()
@@ -94,6 +99,7 @@ function getFirstList() {
         var nowLength = resdata.data.length
         if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
             document.querySelector("button.button-load").remove()
+			btnRemove = 1
             return
         }
         page++
@@ -103,7 +109,11 @@ function getFirstList() {
 }
 // 预加载下一页数据
 function getNextList() {
-    var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
+	if (tag){
+		var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset + "&tag=" + tag;
+	} else {
+		var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
+	}
     fetch(memoUrl_next).then(res => res.json()).then(resdata => {
         nextDom = resdata.data
         nextLength = nextDom.length
@@ -111,10 +121,69 @@ function getNextList() {
         offset = limit * (page - 1)
         if (nextLength < 1) { // 返回数据条数为 0 ，隐藏
             document.querySelector("button.button-load").remove()
+			btnRemove = 1
             return
         }
     })
 }
+
+// 标签选择
+
+document.addEventListener('click', function (event) {
+	var target = event.target;
+	if (target.tagName.toLowerCase() === 'a' && target.getAttribute('href').startsWith('#')) {	
+		event.preventDefault();
+		tag = target.getAttribute('href').substring(1); // 获取标签名
+		if (btnRemove) {	// 如果 botton 被 remove
+			btnRemove = 0;
+			memoDom.insertAdjacentHTML('afterend', load);
+			// 添加 button 事件监听器
+			var btn = document.querySelector("button.button-load");
+			btn.addEventListener("click", function () {
+				btn.textContent = '努力加载中……';
+				updateHTMl(nextDom)
+				if (nextLength < limit) { // 返回数据条数小于限制条数，隐藏
+					document.querySelector("button.button-load").remove()
+					btnRemove = 1
+					return
+				}
+				getNextList()
+			});
+			
+		}		
+		getTagFirstList();
+		var filterElem = document.getElementById('tag-filter');
+		filterElem.style.display = 'block';	// 显示过滤器
+		var tags = document.getElementById('tags');
+		var tagresult = `Filter: <span class='tag-span'><a rel='noopener noreferrer' href=''>#${tag}</a></span>`
+		tags.innerHTML = tagresult;
+		scrollTo(0,0);	// 回到顶部
+	}
+});
+
+function getTagFirstList() {
+	page = 1;
+    offset = 0;
+    nextLength = 0;
+    nextDom = '';
+	memoDom.innerHTML = "";
+    var memoUrl_tag = memoUrl + "&limit=" + limit + "&tag=" + tag;
+    fetch(memoUrl_tag).then(res => res.json()).then(resdata => {
+        updateHTMl(resdata.data);
+		var nowLength = resdata.data.length
+        if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
+            document.querySelector("button.button-load").remove()
+			btnRemove = 1
+            return
+        }
+        page++
+        offset = limit * (page - 1)
+        getNextList()
+    });
+}
+
+// 标签选择 end
+
 // 插入 html
 function updateHTMl(data) {
     var memoResult = "", resultAll = "";
@@ -151,7 +220,7 @@ function updateHTMl(data) {
     // Memos Content
     for (var i = 0; i < data.length; i++) {
         var memoContREG = data[i].content
-            .replace(TAG_REG, "<span class='tag-span'><a rel='noopener noreferrer' href='#'>#$1</a></span> ")
+            .replace(TAG_REG, "<span class='tag-span'><a rel='noopener noreferrer' href='#$1'>#$1</a></span>")
 
         // For CJK language users
         // 用 PanguJS 自动处理中英文混合排版

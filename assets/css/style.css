@@ -612,3 +612,7 @@ footer {
 .hidden {
     display: none !important;
 }
+
+.filter{
+	display:none;
+}
