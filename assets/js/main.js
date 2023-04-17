@@ -237,7 +237,7 @@ function updateHTMl(data) {
             .replace(YOUKU_REG, "<div class='video-wrapper'><iframe src='https://player.youku.com/embed/$1' frameborder=0 'allowfullscreen'></iframe></div>")
             .replace(YOUTUBE_REG, "<div class='video-wrapper'><iframe src='https://www.youtube.com/embed/$1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen title='YouTube Video'></iframe></div>")
 
-        // 解析内置资源文件 
+        // 解析内置资源文件
         if (data[i].resourceList && data[i].resourceList.length > 0) {
             var resourceList = data[i].resourceList;
             var imgUrl = '', resUrl = '', resImgLength = 0;
@@ -248,7 +248,8 @@ function updateHTMl(data) {
                 if (resexlink) {
                     resLink = resexlink
                 } else {
-                    resLink = memos + 'o/r/' + resourceList[j].id + '/' + resourceList[j].filename
+                    fileId = resourceList[j].publicId || resourceList[j].filename
+                    resLink = memos+'o/r/'+resourceList[j].id+'/'+fileId
                 }
                 if (resType == 'image') {
                     imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'

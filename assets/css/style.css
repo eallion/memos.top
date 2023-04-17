@@ -314,15 +314,6 @@ blockquote {
     margin-left: 4px;
 }
 
-/* .timeline img {
-    display: block;
-    max-height: 50vh;
-    max-width: 100%;
-    margin: 10px 0;
-    border-radius: 16px;
-    border: 1px solid var(--color-img-border);
-} */
-
 .resource-wrapper {
     display: flex;
     width: 100%;
@@ -357,7 +348,7 @@ blockquote {
     height: 202px;
 }
 
-.resimg img {
+.timeline img, .resimg img {
     display: block;
     vertical-align: middle;
     max-width: 100%;
