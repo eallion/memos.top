@@ -40,6 +40,10 @@
 
         <div class="total">Total <span id="total">0</span> Memos 🎉</div>
 
+        <blockquote id="tag-filter" class="filter">
+            <div id="tags"></div>
+        </blockquote>
+
         <div id="memos" class="memos">
             <!-- Memos Container -->
         </div>
@@ -59,9 +63,9 @@
     <!-- Your Memos API -->
     <script type="text/javascript">
         var memos = {
-            host: 'https://demo.usememos.com/',  // Your Memos, with '/' end.
+            host: 'https://memos.eallion.com/',  // Your Memos, with '/' end.
             limit: '10',  // Pagination to show.
-            creatorId: '1',  // The old instance is 101, and the new instance is 1. 
+            creatorId: '102',  // The old instance is 101, and the new instance is 1. 
             domId: '#memos',  // Default #memos.
             username: 'memos',  // You can customize the display ID that is not related to memos.
             name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
