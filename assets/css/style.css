@@ -191,6 +191,7 @@ blockquote {
 
 .memos__text {
     position: relative;
+    box-sizing: border-box;
     background: var(--color-text-bg);
     padding: 1rem;
     border-radius: 0.5rem;
