@@ -191,6 +191,7 @@ blockquote {
 
 .memos__text {
     position: relative;
+    box-sizing: border-box;
     background: var(--color-text-bg);
     padding: 1rem;
     border-radius: 0.5rem;
@@ -518,7 +519,7 @@ blockquote {
 @media (max-width: 683px) {
 
     body {
-        padding: 45px 50px 45px 20px;
+        padding: 45px 20px;
     }
 
     .menu,
