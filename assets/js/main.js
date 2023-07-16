@@ -65,7 +65,7 @@ if (typeof (memos) !== "undefined") {
 
 var limit = memo.limit
 var memos = memo.host
-var memoUrl = memos + "api/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
+var memoUrl = memos + "api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
 var page = 1,
     offset = 0,
     nextLength = 0,
@@ -95,8 +95,8 @@ if (memoDom) {
 function getFirstList() {
     var memoUrl_first = memoUrl + "&limit=" + limit;
     fetch(memoUrl_first).then(res => res.json()).then(resdata => {
-        updateHTMl(resdata.data)
-        var nowLength = resdata.data.length
+        updateHTMl(resdata)
+        var nowLength = resdata.length
         if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
             document.querySelector("button.button-load").remove()
 			btnRemove = 1
@@ -115,7 +115,7 @@ function getNextList() {
 		var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
 	}
     fetch(memoUrl_next).then(res => res.json()).then(resdata => {
-        nextDom = resdata.data
+        nextDom = resdata
         nextLength = nextDom.length
         page++
         offset = limit * (page - 1)
@@ -169,8 +169,8 @@ function getTagFirstList() {
 	memoDom.innerHTML = "";
     var memoUrl_tag = memoUrl + "&limit=" + limit + "&tag=" + tag;
     fetch(memoUrl_tag).then(res => res.json()).then(resdata => {
-        updateHTMl(resdata.data);
-		var nowLength = resdata.data.length
+        updateHTMl(resdata);
+		var nowLength = resdata.length
         if (nowLength < limit) { // 返回数据条数小于 limit 则直接移除“加载更多”按钮，中断预加载
             document.querySelector("button.button-load").remove()
 			btnRemove = 1
@@ -329,7 +329,7 @@ function movieShow(fetch_href, fetch_item) {
     var storage = localStorage.getItem(fetch_item);
     var data = JSON.parse(storage);
     var db_star = Math.ceil(data.rating);
-    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.name + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div><img referrer-policy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.img + "></div>"
+    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.name + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div></div>"
     var db_div = document.createElement("div");
     var qs_href = ".timeline a[href='" + fetch_href + "']"
     var qs_dom = document.querySelector(qs_href)
@@ -341,7 +341,7 @@ function bookShow(fetch_href, fetch_item) {
     var storage = localStorage.getItem(fetch_item);
     var data = JSON.parse(storage);
     var db_star = Math.ceil(data.rating.average);
-    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.title + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " </time><section class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div><img referrer-policy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.images.medium + "></div>"
+    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.title + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " </time><section class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div></div>"
     var db_div = document.createElement("div");
     var qs_href = ".timeline a[href='" + fetch_href + "']"
     var qs_dom = document.querySelector(qs_href)
@@ -356,10 +356,10 @@ window.ViewImage && ViewImage.init('.container img');
 // Memos Total Start
 // Get Memos total count
 function getTotal() {
-    var totalUrl = memos + "api/memo/stats?creatorId=" + memo.creatorId
+    var totalUrl = memos + "api/v1/memo/stats?creatorId=" + memo.creatorId
     fetch(totalUrl).then(res => res.json()).then(resdata => {
-        if (resdata.data) {
-            var allnums = resdata.data.length
+        if (resdata) {
+            var allnums = resdata.length
             var memosCount = document.getElementById('total');
             memosCount.innerHTML = allnums;
         }
