@@ -64,8 +64,8 @@ if (typeof (memos) !== "undefined") {
 }
 
 var limit = memo.limit
-var memos = memo.host
-var memoUrl = memos + "api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
+var memos = memo.host.replace(/\/$/, '')
+var memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
 var page = 1,
     offset = 0,
     nextLength = 0,
@@ -228,7 +228,7 @@ function updateHTMl(data) {
         // 把下面的 memoContREG = marked.parse(memoContREG) 改为：memoContREG = marked.parse(pangu.spacing(memoContREG))
 
         memoContREG = marked.parse(memoContREG)
-            .replace(BILIBILI_REG, "<div class='video-wrapper'><iframe src='//player.bilibili.com/player.html?bvid=$1&as_wide=1&high_quality=1&danmaku=0' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true' style='position:absolute;height:100%;width:100%;'></iframe></div>")
+            .replace(BILIBILI_REG, "<div class='video-wrapper'><iframe src='//www.bilibili.com/blackboard/html5mobileplayer.html?bvid=$1&as_wide=1&high_quality=1&danmaku=0' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true' style='position:absolute;height:100%;width:100%;'></iframe></div>")
             .replace(YOUTUBE_REG, "<div class='video-wrapper'><iframe src='https://www.youtube.com/embed/$1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen title='YouTube Video'></iframe></div>")
             .replace(NETEASE_MUSIC_REG, "<meting-js auto='https://music.163.com/#/song?id=$1'></meting-js>")
             .replace(QQMUSIC_REG, "<meting-js auto='https://y.qq.com/n/yqq/song$1.html'></meting-js>")
@@ -356,7 +356,7 @@ window.ViewImage && ViewImage.init('.container img');
 // Memos Total Start
 // Get Memos total count
 function getTotal() {
-    var totalUrl = memos + "api/v1/memo/stats?creatorId=" + memo.creatorId
+    var totalUrl = memos + "/api/v1/memo/stats?creatorId=" + memo.creatorId
     fetch(totalUrl).then(res => res.json()).then(resdata => {
         if (resdata) {
             var allnums = resdata.length

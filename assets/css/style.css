@@ -394,7 +394,7 @@ blockquote {
 }
 
 .post-preview--meta {
-    width: 75%;
+    width: 100%;
     padding: 25px;
     overflow: hidden;
 }
