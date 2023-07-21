@@ -3,17 +3,17 @@
 moment.updateLocale('zh-cn', {
     meridiem: function (hour, minute, isLowercase) {
         if (hour < 6) {
-            return "凌晨";
+            return "Before dawn";
         } else if (hour < 9) {
-            return "早上";
+            return "Early morning";
         } else if (hour < 11 && minute < 30) {
-            return "上午";
+            return "Morning";
         } else if (hour < 13 && minute < 30) {
-            return "中午";
+            return "Noon";
         } else if (hour < 18) {
-            return "下午";
+            return "Afternoon";
         } else {
-            return "晚上";
+            return "Evening";
         }
     }
 });
@@ -28,20 +28,20 @@ moment.updateLocale('zh-cn', {
     year = new Date().getFullYear();
     formats = {
         seconds: {
-            short: ' 秒前',
-            long: ' 秒前'
+            short: ' Sec',
+            long: ' Second'
         },
         minutes: {
-            short: ' 分前',
-            long: ' 分前'
+            short: ' Min',
+            long: ' Minute'
         },
         hours: {
-            short: ' 小时前',
-            long: ' 小时前'
+            short: ' Hr',
+            long: ' Hour'
         },
         days: {
-            short: ' 天前',
-            long: ' 天前'
+            short: ' D',
+            long: ' Day'
         }
     };
 
@@ -65,19 +65,21 @@ moment.updateLocale('zh-cn', {
                 if (diff < week) {
                     unit = 'days';
                 } else if (this.year() == year) {
-                    return this.format('MM月DD日，HH:mm');
+                    return this.format('MMM DD, HH:mm');
                 } else {
-                    return this.format('YYYY年MM月DD日，HH:mm');
+                    return this.format('MMM DD, YYYY. HH:mm');
                 }
             } else {
-                return this.format('YYYY年MM月DD日，HH:mm');
+                return this.format('MMMM DD, YYYY. HH:mm');
             }
             if (!(num && unit)) {
                 num = moment.duration(diff)[unit]();
             }
             unitStr = unit = formats[unit][format];
             if (format === 'long' && num > 1) {
-                unitStr += '';
+                unitStr += 's ago';
+            } else {
+                unitStr += ' ago';
             }
             return num + unitStr;
         };
