@@ -249,7 +249,7 @@ function updateHTMl(data) {
                     resLink = resexlink
                 } else {
                     fileId = resourceList[j].publicId || resourceList[j].filename
-                    resLink = memos+'o/r/'+resourceList[j].id+'/'+fileId
+                    resLink = memos+'/o/r/'+resourceList[j].id+'/'+fileId
                 }
                 if (resType == 'image') {
                     imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'
