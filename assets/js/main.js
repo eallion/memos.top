@@ -65,7 +65,8 @@ if (typeof (memos) !== "undefined") {
 
 var limit = memo.limit
 var memos = memo.host.replace(/\/$/, '')
-var memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
+//var memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
+memoUrl = "../assets/memos.json"
 var page = 1,
     offset = 0,
     nextLength = 0,
@@ -93,7 +94,8 @@ if (memoDom) {
 }
 
 function getFirstList() {
-    var memoUrl_first = memoUrl + "&limit=" + limit;
+    // var memoUrl_first = memoUrl + "&limit=" + limit;
+    var memoUrl_first = memoUrl
     fetch(memoUrl_first).then(res => res.json()).then(resdata => {
         updateHTMl(resdata)
         var nowLength = resdata.length
@@ -109,11 +111,12 @@ function getFirstList() {
 }
 // 预加载下一页数据
 function getNextList() {
-	if (tag){
-		var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset + "&tag=" + tag;
-	} else {
-		var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
-	}
+	// if (tag){
+	// 	var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset + "&tag=" + tag;
+	// } else {
+	// 	var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
+	// }
+    var memoUrl_next = memoUrl
     fetch(memoUrl_next).then(res => res.json()).then(resdata => {
         nextDom = resdata
         nextLength = nextDom.length
@@ -167,7 +170,8 @@ function getTagFirstList() {
     nextLength = 0;
     nextDom = '';
 	memoDom.innerHTML = "";
-    var memoUrl_tag = memoUrl + "&limit=" + limit + "&tag=" + tag;
+    // var memoUrl_tag = memoUrl + "&limit=" + limit + "&tag=" + tag;
+    var memoUrl_tag = memoUrl
     fetch(memoUrl_tag).then(res => res.json()).then(resdata => {
         updateHTMl(resdata);
 		var nowLength = resdata.length
