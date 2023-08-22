@@ -66,7 +66,8 @@ if (typeof (memos) !== "undefined") {
 var limit = memo.limit
 var memos = memo.host.replace(/\/$/, '')
 //var memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL"
-memoUrl = "../assets/memos.json"
+memoUrl1 = "../assets/memos_p1.json"
+memoUrl2 = "../assets/memos_p2.json"
 var page = 1,
     offset = 0,
     nextLength = 0,
@@ -95,7 +96,7 @@ if (memoDom) {
 
 function getFirstList() {
     // var memoUrl_first = memoUrl + "&limit=" + limit;
-    var memoUrl_first = memoUrl
+    var memoUrl_first = memoUrl1
     fetch(memoUrl_first).then(res => res.json()).then(resdata => {
         updateHTMl(resdata)
         var nowLength = resdata.length
@@ -116,7 +117,7 @@ function getNextList() {
 	// } else {
 	// 	var memoUrl_next = memoUrl + "&limit=" + limit + "&offset=" + offset;
 	// }
-    var memoUrl_next = memoUrl
+    var memoUrl_next = memoUrl2
     fetch(memoUrl_next).then(res => res.json()).then(resdata => {
         nextDom = resdata
         nextLength = nextDom.length
@@ -333,7 +334,7 @@ function movieShow(fetch_href, fetch_item) {
     var storage = localStorage.getItem(fetch_item);
     var data = JSON.parse(storage);
     var db_star = Math.ceil(data.rating);
-    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.name + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div></div>"
+    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.name + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating + "</div></div><time class='post-preview--date'>导演：" + data.director + " / 类型：" + data.genre + " / " + data.year + "</time><section class='post-preview--excerpt'>" + data.intro.replace(/\s*/g, "") + "</section></div></div><img referrer-policy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.img + "></div>"
     var db_div = document.createElement("div");
     var qs_href = ".timeline a[href='" + fetch_href + "']"
     var qs_dom = document.querySelector(qs_href)
@@ -345,7 +346,7 @@ function bookShow(fetch_href, fetch_item) {
     var storage = localStorage.getItem(fetch_item);
     var data = JSON.parse(storage);
     var db_star = Math.ceil(data.rating.average);
-    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.title + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " </time><section class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div></div>"
+    var db_html = "<div class='post-preview'><div class='post-preview--meta'><div class='post-preview--middle'><h4 class='post-preview--title'><a target='_blank' rel='noreferrer' href='" + fetch_href + "'>《" + data.title + "》</a></h4><div class='rating'><div class='rating-star allstar" + db_star + "'></div><div class='rating-average'>" + data.rating.average + "</div></div><time class='post-preview--date'>作者：" + data.author + " </time><section class='post-preview--excerpt'>" + data.summary.replace(/\s*/g, "") + "</section></div></div><img referrer-policy='no-referrer' loading='lazy' class='post-preview--image' src=" + data.images.medium + "></div>"
     var db_div = document.createElement("div");
     var qs_href = ".timeline a[href='" + fetch_href + "']"
     var qs_dom = document.querySelector(qs_href)
