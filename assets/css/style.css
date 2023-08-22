@@ -191,7 +191,6 @@ blockquote {
 
 .memos__text {
     position: relative;
-    box-sizing: border-box;
     background: var(--color-text-bg);
     padding: 1rem;
     border-radius: 0.5rem;
@@ -353,10 +352,6 @@ blockquote {
     display: block;
     vertical-align: middle;
     max-width: 100%;
-    height: auto;
-    min-height: 100%;
-    width: auto;
-    min-width: 100%;
     cursor: pointer;
     -o-object-fit: cover;
     object-fit: cover;
@@ -395,7 +390,7 @@ blockquote {
 }
 
 .post-preview--meta {
-    width: 100%;
+    width: 75%;
     padding: 25px;
     overflow: hidden;
 }
@@ -433,10 +428,12 @@ blockquote {
     overflow: hidden;
 }
 
+.post-preview img {
+    height: 210px !important;
+}
+
 .post-preview--image {
     margin: 0 !important;
-    height: 210px !important;
-    width: auto;
     float: right;
     border-radius: 0 !important;
     border-top-right-radius: 2px !important;
@@ -519,7 +516,7 @@ blockquote {
 @media (max-width: 683px) {
 
     body {
-        padding: 45px 20px;
+        padding: 45px 50px 45px 20px;
     }
 
     .menu,
