@@ -204,7 +204,7 @@ function updateHTMl(data) {
     // 解析优酷视频
     const YOUKU_REG = /<a\shref="https:\/\/v\.youku\.com\/.*\/id_([a-z|A-Z|0-9|==]+)\.html".*?>.*<\/a>/g;
     //解析 Youtube
-    const YOUTUBE_REG = /<a\shref="https:\/\/www\.youtube\.com\/watch\?v\=([a-z|A-Z|0-9]{11})\".*?>.*<\/a>/g;
+    const YOUTUBE_REG = /<a\shref="https:\/\/www\.youtube\.com\/watch\?v\=([a-z|_|A-Z|0-9]{11})\".*?>.*<\/a>/g;
 
     // Marked Options
     marked.setOptions({
