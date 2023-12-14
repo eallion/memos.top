@@ -1,7 +1,7 @@
 <p align="center"><a href="https://usememos.com"><img height="64px" src="https://raw.githubusercontent.com/eallion/memos.top/main/assets/img/logo-full.webp" alt="✍️ memos" /></a></p>
 
 <p align="center">Memos Top. A static page rendered with the Memos API.</p>
-<p align="center">Simple HTML, Pure CSS, Vanilla JS. Anti-Framework.</p>
+<p align="center">Simple HTML, Pure CSS, Vanilla JS.</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Memos-Top-orange" />
@@ -18,6 +18,10 @@
 </p>
 
 English | [中文](./README_cn.md)
+
+> [!NOTE]  
+> If you're looking to embed your Mastodon toots on your website, you might want to check out this project.
+> <https://github.com/eallion/mastodon-embed-feed-timeline>
 
 ### WebStack
 
