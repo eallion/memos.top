@@ -20,12 +20,12 @@
 English | [中文](./README_cn.md)
 
 > [!NOTE]  
-> If you're looking to embed your Mastodon toots on your website, you might want to check out this project.
+> If you're looking to embed your Mastodon toots on your website, you might want to check out this project.  
 > <https://github.com/eallion/mastodon-embed-feed-timeline>
 
 ### WebStack
 
-> • Darkmode Support
+> • Darkmode Support  
 > • Mobile Friendly
 
 - [**Memos**](https://github.com/usememos/memos)

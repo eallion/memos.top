@@ -20,12 +20,12 @@
 中文 | [English](./README.md)
 
 > [!NOTE]  
-> 如果你想把你的 Mastodon （长毛象）的嘟文嵌入到自己的网页中，你可以参考这个项目。
+> 如果你想把你的 Mastodon （长毛象）的嘟文嵌入到自己的网页中，你可以参考这个项目。  
 > <https://github.com/eallion/mastodon-embed-feed-timeline>
 
 ### 前端框架
 
-> • 暗黑模式适配
+> • 暗黑模式适配  
 > • 移动端自适应
 
 - [**Memos**](https://github.com/usememos/memos)
