@@ -91,9 +91,15 @@ git clone https://github.com/eallion/memos.top
 5. 按默认设置不用改动，直接点`Deploy`
 6. 中国大陆可能需要绑定一个自定义域名才能访问 Vercel
 
+### 其他平台
+
+你也可以把这个静态页面部署到 Cloudflare Pages 或者 Netlify 等平台。
+
 ### 使用技巧
 
-发布 Memos 时的格式：
+<details><summary>
+发布 Memos 时的格式： 👇👇👇
+</summary>  
 
 1. Bilibili 视频。分享的视频链接。支持`BV/AV`号。暂不支持`b23.tv`链接。
 
@@ -146,7 +152,9 @@ https://book.douban.com/subject/2567698/
 https://movie.douban.com/subject/1889243/
 ```
 
-### [许可证](https://github.com/me-shaon/GLWTPL)
+</details>
+
+### [许可证 GLWTPL](https://github.com/me-shaon/GLWTPL)
 
 ```
 GLWT（Good Luck With That，祝你好运）公共许可证
