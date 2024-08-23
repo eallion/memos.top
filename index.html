@@ -54,7 +54,7 @@
         <p>Copyright @
             <script>
                 document.write(new Date().getFullYear())
-            </script><a href="https://eallion.com/" target="_blank" rel="noopener noreferrer" class="hidden">Charles
+            </script><a href="https://www.eallion.com/" target="_blank" rel="noopener noreferrer" class="hidden">Charles
                 'eallion' Chin</a> All Rights Reserved.
         </p>
 
@@ -63,28 +63,23 @@
     <!-- Your Memos API -->
     <script type="text/javascript">
         var memos = {
-            host: 'https://memos.eallion.com/',  // Your Memos instance.
+            host: 'https://memos.example.com/',  // Your Memos instance.
             limit: '10',  // Pagination to show.
-            creatorId: '102',  // The old instance is 101, and the new instance is 1. 
+            creatorId: '101',  // The old instance is 101, and the new instance is 1. 
             domId: '#memos',  // Default #memos.
             username: 'memos',  // You can customize the display ID that is not related to memos.
             name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
+            language: 'en', // 'en' 'zh-CN' etc. Used by Relative Time.
+            APIVersion: 'new', // 'new' or 'legacy', Memos API Version, <v0.22.0: 'legacy', >=v0.22.0: 'new'.
         }
 
     </script>
-    <script type="text/javascript" src="assets/js/lazyload.min.js?v=17.8.3"></script>
-    <script type="text/javascript" src="assets/js/marked.min.js?v=11.1.1"></script>
+    <script type="text/javascript" src="assets/js/marked.min.js?v=14.0.0"></script>
     
     <script type="text/javascript" src="assets/js/view-image.min.js?v=2.0.2"></script>
 
-    <!-- for CJK language auto-spacing -->
-    <!-- <script type="text/javascript" src="assets/js/pangu.min.js?v=4.0.7"></script> -->
-
-    <script type="text/javascript" src="assets/js/moment.min.js?v=2.30.1"></script>
-    <script type="text/javascript" src="assets/js/moment.twitter.js"></script>
-
-    <!-- <script type="text/javascript" src="assets/js/APlayer.min.js"></script> -->
-    <!-- <script type="text/javascript" src="assets/js/Meting.min.js"></script> -->
+    <script type="text/javascript" src="assets/js/APlayer.min.js"></script>
+    <script type="text/javascript" src="assets/js/Meting.min.js"></script>
 
     <script type="text/javascript" src="assets/js/highlight.min.js?v=11.9.0"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
