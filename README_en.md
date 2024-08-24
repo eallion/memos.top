@@ -59,6 +59,8 @@ Replace the default value in `index.html`:
     name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
     language: 'en', // `en` `zh-CN` etc. Used by Relative Time.
     APIVersion: 'new', // `new` or `legacy`, Memos API Version, <`v0.22.0`: `legacy`, >=`v0.22.0`: `new`.
+    total: true, // Display total memos. No interface is displayed in the new version.
+    doubanAPI: '', // Fill a API to render douban subject. `null` to disable. API self-hosted: https://github.com/eallion/douban-api-rs
   }
 </script>
 ```
@@ -70,7 +72,7 @@ Replace the Logo and Avatar in the `assets/img` folder.
 - `logo.webp` is favicon
 - `avatar.jpg` is your icon
 
-[ ] Todo: Get Memos Avatar: https://memos.apidocumentation.com/reference#tag/userservice/GET/file/{name}/avatar
+- [ ] Todo: Get Memos Avatar: https://memos.apidocumentation.com/reference#tag/userservice/GET/file/{name}/avatar
 
 ##### 4. Upload
 
@@ -94,6 +96,10 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 4. Import GitHub repo
 5. Configure Project default
 6. Deploy
+
+Todo:
+
+- [ ] One key deployment
 
 ### Other
 
@@ -150,7 +156,7 @@ https://y.qq.com/n/ryqq/songDetail/004W3BfK46dMXk
 
 8. Douban. Just URL. Need your own API.
 
-> If enable. You need to uncomment [`// fetchDB()`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L208) and replace api [`var dbAPI = "https://api.example.com/"`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js#L218) in [`assets/js/main.js`](https://github.com/eallion/memos.top/blob/main/assets/js/main.js)
+> If enable. You need to self hosted an API: https://github.com/eallion/douban-api-rs
 
 ```
 https://book.douban.com/subject/2567698/

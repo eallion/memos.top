@@ -59,6 +59,8 @@ git clone https://github.com/eallion/memos.top
     name: 'Official Demo', // 自定义显示在前端的全名。
     language: 'zh-CN', // `en` `zh-CN` 等，用于显示相对时间。
     APIVersion: 'new', // `new` 或者 `legacy`，Memos API 版本, 小于 `v0.22.0`: 填写：`legacy`，大于等于 `v0.22.0`：填写`new`。
+    total: true, // 显示 Memos 总条数。新版没有好办法显示，老版本也关闭了 Amount API。
+    doubanAPI: '', // 填入一个 API 渲染豆瓣条目，不填不渲染，只显示 URL，自建 API：https://github.com/eallion/douban-api-rs
   }
 </script>
 ```
@@ -94,6 +96,10 @@ git clone https://github.com/eallion/memos.top
 4. 新建一个 Project ，导入 GitHub 上的仓库
 5. 按默认设置不用改动，直接点`Deploy`
 6. 中国大陆可能需要绑定一个自定义域名才能访问 Vercel
+
+Todo:
+
+- [ ] Vercel 一键部署
 
 ### 其他平台
 

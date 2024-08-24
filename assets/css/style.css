@@ -358,6 +358,7 @@ blockquote {
 }
 
 .tag-span {
+    margin: 0 0.25rem;
     color: var(--color-tag);
 }
 

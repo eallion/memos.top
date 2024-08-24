@@ -11,7 +11,9 @@ var memo = {
     username: 'Admin',
     name: 'Administrator',
     APIVersion: 'new',
-    language: 'en'
+    language: 'en',
+    total: true,
+    doubanAPI: '',
 }
 if (typeof (memos) !== "undefined") {
     for (var key in memos) {
@@ -218,17 +220,6 @@ function updateHTMl(data) {
     //解析 Youtube
     const YOUTUBE_REG = /<a\shref="https:\/\/www\.youtube\.com\/watch\?v\=([a-z|A-Z|0-9]{11})\".*?>.*<\/a>/g;
 
-    // Marked Options
-    marked.setOptions({
-        breaks: true,
-        smartypants: true,
-        langPrefix: 'language-',
-        highlight: function (code, lang) {
-            const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-            return hljs.highlight(code, { language }).value;
-        },
-    });
-
     // Memos Content
     if (memo.APIVersion === 'new') {
         data = data.memos
@@ -252,35 +243,70 @@ function updateHTMl(data) {
             .replace(YOUTUBE_REG, "<div class='video-wrapper'><iframe src='https://www.youtube.com/embed/$1' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen title='YouTube Video'></iframe></div>")
 
         // 解析内置资源文件
-        if (data[i].resourceList && data[i].resourceList.length > 0) {
-            var resourceList = data[i].resourceList;
-            var imgUrl = '', resUrl = '', resImgLength = 0;
-            for (var j = 0; j < resourceList.length; j++) {
-                var resType = resourceList[j].type.slice(0, 5);
-                var resexlink = resourceList[j].externalLink;
-                var resLink = ''
-                if (resexlink) {
-                    resLink = resexlink
-                } else {
-                    fileId = resourceList[j].publicId || resourceList[j].filename
-                    resLink = memos+'/o/r/'+resourceList[j].id+'/'+fileId
+        if (memo.APIVersion === 'new') {
+            if (data[i].resourceList && data[i].resourceList.length > 0) {
+                var resourceList = data[i].resourceList;
+                var imgUrl = '', resUrl = '', resImgLength = 0;
+                for (var j = 0; j < resourceList.length; j++) {
+                    var resType = resourceList[j].type.slice(0, 5);
+                    var resexlink = resourceList[j].externalLink;
+                    var resLink = ''
+                    if (resexlink) {
+                        resLink = resexlink
+                    } else {
+                        fileId = resourceList[j].publicId || resourceList[j].filename
+                        resLink = memos+'/o/r/'+resourceList[j].id+'/'+fileId
+                    }
+                    if (resType == 'image') {
+                        imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'
+                        resImgLength = resImgLength + 1
+                    }
+                    if (resType !== 'image') {
+                        resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + resourceList[j].filename + '</a>'
+                    }
                 }
-                if (resType == 'image') {
-                    imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'
-                    resImgLength = resImgLength + 1
+                if (imgUrl) {
+                    var resImgGrid = ""
+                    if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
+                    memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>'
                 }
-                if (resType !== 'image') {
-                    resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + resourceList[j].filename + '</a>'
+                if (resUrl) {
+                    memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
                 }
             }
-            if (imgUrl) {
-                var resImgGrid = ""
-                if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
-                memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>'
+        } else if (memo.APIVersion === 'legacy') {
+            if (data[i].resourceList && data[i].resourceList.length > 0) {
+                var resourceList = data[i].resourceList;
+                var imgUrl = '', resUrl = '', resImgLength = 0;
+                for (var j = 0; j < resourceList.length; j++) {
+                    var resType = resourceList[j].type.slice(0, 5);
+                    var resexlink = resourceList[j].externalLink;
+                    var resLink = ''
+                    if (resexlink) {
+                        resLink = resexlink
+                    } else {
+                        fileId = resourceList[j].publicId || resourceList[j].filename
+                        resLink = memos+'/o/r/'+resourceList[j].id+'/'+fileId
+                    }
+                    if (resType == 'image') {
+                        imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'
+                        resImgLength = resImgLength + 1
+                    }
+                    if (resType !== 'image') {
+                        resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + resourceList[j].filename + '</a>'
+                    }
+                }
+                if (imgUrl) {
+                    var resImgGrid = ""
+                    if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
+                    memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>'
+                }
+                if (resUrl) {
+                    memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
+                }
             }
-            if (resUrl) {
-                memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
-            }
+        } else {
+                throw new Error('Invalid APIVersion');
         }
         if (memo.APIVersion === 'new') {
             var relativeTime = getRelativeTime(new Date(data[i].createTime));
@@ -295,8 +321,9 @@ function updateHTMl(data) {
     var memoAfter = '</ul>'
     resultAll = memoBefore + memoResult + memoAfter
     memoDom.insertAdjacentHTML('beforeend', resultAll);
-    //取消这行注释解析豆瓣电影和豆瓣阅读
-    // fetchDB()
+    if (memo.doubanAPI) {
+        fetchDB();
+    }
     document.querySelector('button.button-load').textContent = '加载更多';
 }
 // Memos End
@@ -306,7 +333,7 @@ function updateHTMl(data) {
 // 解析豆瓣必须要API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
 // 已内置样式，修改 API 即可使用
 function fetchDB() {
-    var dbAPI = "https://api.example.com/";  // 修改为自己的 API
+    var dbAPI = memo.doubanAPI;
     var dbA = document.querySelectorAll(".timeline a[href*='douban.com/subject/']:not([rel='noreferrer'])") || '';
     if (dbA) {
         for (var i = 0; i < dbA.length; i++) {
@@ -409,7 +436,14 @@ function getTotal() {
         throw new Error('Invalid APIVersion');
     }
 };
-window.onload = getTotal();
+if (memo.total === true) {
+    window.onload = getTotal();
+} else {
+    var totalDiv = document.querySelector('div.total');
+    if (totalDiv) {
+        totalDiv.remove();
+    }
+}
 // Memos Total End
 
 // Relative Time Start

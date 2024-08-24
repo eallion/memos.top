@@ -63,7 +63,7 @@
     <!-- Your Memos API -->
     <script type="text/javascript">
         var memos = {
-            host: 'https://memos.example.com/',  // Your Memos instance.
+            host: 'https://memos.eallion.com/',  // Your Memos instance.
             limit: '10',  // Pagination to show.
             creatorId: '101',  // The old instance is 101, and the new instance is 1. 
             domId: '#memos',  // Default #memos.
@@ -71,20 +71,17 @@
             name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
             language: 'en', // 'en' 'zh-CN' etc. Used by Relative Time.
             APIVersion: 'new', // 'new' or 'legacy', Memos API Version, <v0.22.0: 'legacy', >=v0.22.0: 'new'.
+            total: true, // Display total memos. No interface is displayed in the new version.
+            doubanAPI: '', // Fill a API to render douban subject. `null` to disable. API self-hosted: https://github.com/eallion/douban-api-rs
         }
 
     </script>
-    <script type="text/javascript" src="assets/js/marked.min.js?v=14.0.0"></script>
-    
-    <script type="text/javascript" src="assets/js/view-image.min.js?v=2.0.2"></script>
-
+    <script type="text/javascript" src="assets/js/marked.umd.min.js?v=14.0.0"></script>
+    <script type="text/javascript" src="assets/js/view-image.min.js"></script>
     <script type="text/javascript" src="assets/js/APlayer.min.js"></script>
     <script type="text/javascript" src="assets/js/Meting.min.js"></script>
-
-    <script type="text/javascript" src="assets/js/highlight.min.js?v=11.9.0"></script>
     <script type="text/javascript" src="assets/js/main.js"></script>
     <script type="text/javascript" src="assets/js/custom.js"></script>
-    <script>hljs.highlightAll();</script>
 </body>
 
 </html>
