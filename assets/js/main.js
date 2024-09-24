@@ -265,11 +265,11 @@ function updateHTMl(data) {
                         if (resexlink) {
                             imgUrl += '<div class="resimg"><img loading="lazy" src="' + resexlink + '"/></div>';
                         } else {
-                            resLink = 'https://memos.eallion.com/file/' + name + '/' + filename;
+                            resLink = memos + '/file/' + name + '/' + filename;
                             imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>';
                         }
                     } else {
-                        resLink = 'https://memos.eallion.com/file/' + name + '/' + filename;
+                        resLink = memos + '/file/' + name + '/' + filename;
                         resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + filename + '</a>';
                     }
                 }
