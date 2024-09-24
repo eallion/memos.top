@@ -229,6 +229,13 @@ function updateHTMl(data) {
             throw new Error('Invalid APIVersion');
     }
     for (var i = 0; i < data.length; i++) {
+        if (memo.APIVersion === 'new') {
+            var uId = data[i].uid
+        } else if (memo.APIVersion === 'legacy') {
+            var uId = data[i].id
+        } else {
+                throw new Error('Invalid APIVersion');
+        }
         var memoContREG = data[i].content
             .replace(TAG_REG, "<span class='tag-span'><a rel='noopener noreferrer' href='#$1'>#$1</a></span>")
 
@@ -244,34 +251,33 @@ function updateHTMl(data) {
 
         // 解析内置资源文件
         if (memo.APIVersion === 'new') {
-            if (data[i].resourceList && data[i].resourceList.length > 0) {
-                var resourceList = data[i].resourceList;
-                var imgUrl = '', resUrl = '', resImgLength = 0;
+            if (data[i].resources && data[i].resources.length > 0) {
+                var resourceList = data[i].resources; // 修改为 resources
+                var imgUrl = '', resUrl = '';
                 for (var j = 0; j < resourceList.length; j++) {
                     var resType = resourceList[j].type.slice(0, 5);
                     var resexlink = resourceList[j].externalLink;
-                    var resLink = ''
-                    if (resexlink) {
-                        resLink = resexlink
+                    var resLink = '';
+                    var filename = resourceList[j].filename;
+                    var name = resourceList[j].name; // 获取资源的名称
+        
+                    if (resType === 'image') {
+                        if (resexlink) {
+                            imgUrl += '<div class="resimg"><img loading="lazy" src="' + resexlink + '"/></div>';
+                        } else {
+                            resLink = 'https://memos.eallion.com/file/' + name + '/' + filename;
+                            imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>';
+                        }
                     } else {
-                        fileId = resourceList[j].publicId || resourceList[j].filename
-                        resLink = memos+'/o/r/'+resourceList[j].id+'/'+fileId
-                    }
-                    if (resType == 'image') {
-                        imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>'
-                        resImgLength = resImgLength + 1
-                    }
-                    if (resType !== 'image') {
-                        resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + resourceList[j].filename + '</a>'
+                        resLink = 'https://memos.eallion.com/file/' + name + '/' + filename;
+                        resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + filename + '</a>';
                     }
                 }
                 if (imgUrl) {
-                    var resImgGrid = ""
-                    if (resImgLength !== 1) { var resImgGrid = "grid grid-" + resImgLength }
-                    memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>'
+                    memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>';
                 }
                 if (resUrl) {
-                    memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>'
+                    memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>';
                 }
             }
         } else if (memo.APIVersion === 'legacy') {
@@ -315,7 +321,7 @@ function updateHTMl(data) {
         } else {
                 throw new Error('Invalid APIVersion');
         }
-        memoResult += '<li class="timeline"><div class="memos__content"><div class="memos__text"><div class="memos__userinfo"><div>' + memo.name + '</div><div><svg viewBox="0 0 24 24" aria-label="认证账号" class="memos__verify"><g><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path></g></svg></div><div class="memos__id">@' + memo.username + '</div></div><p>' + memoContREG + '</p></div><div class="memos__meta"><small class="memos__date">' + relativeTime + ' • From「<a href="' + memo.host + 'm/' + data[i].id + '" target="_blank">Memos</a>」</small></div></div></li>'
+        memoResult += '<li class="timeline"><div class="memos__content"><div class="memos__text"><div class="memos__userinfo"><div>' + memo.name + '</div><div><svg viewBox="0 0 24 24" aria-label="认证账号" class="memos__verify"><g><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"></path></g></svg></div><div class="memos__id">@' + memo.username + '</div></div><p>' + memoContREG + '</p></div><div class="memos__meta"><small class="memos__date">' + relativeTime + ' • From「<a href="' + memo.host + 'm/' + uId + '" target="_blank">Memos</a>」</small></div></div></li>'
     }
     var memoBefore = '<ul class="">'
     var memoAfter = '</ul>'
@@ -330,7 +336,7 @@ function updateHTMl(data) {
 
 // 解析豆瓣 Start
 // 文章内显示豆瓣条目 https://immmmm.com/post-show-douban-item/
-// 解析豆瓣必须要API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
+// 解析豆瓣必须要 API，请找朋友要权限，或自己按 https://github.com/eallion/douban-api-rs 这个架设 API，非常简单，资源消耗很少
 // 已内置样式，修改 API 即可使用
 function fetchDB() {
     var dbAPI = memo.doubanAPI;
