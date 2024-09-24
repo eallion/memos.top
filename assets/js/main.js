@@ -280,7 +280,7 @@ function updateHTMl(data) {
     resultAll = memoBefore + memoResult + memoAfter
     memoDom.insertAdjacentHTML('beforeend', resultAll);
     //取消这行注释解析豆瓣电影和豆瓣阅读
-    fetchDB()
+    //fetchDB()
     document.querySelector('button.button-load').textContent = '加载更多';
 }
 // Memos End
@@ -372,7 +372,7 @@ function getTotal() {
         // Do something for an error here
     });
 };
-window.onload = getTotal();
+// window.onload = getTotal();
 // Memos Total End
 
 // Toggle Darkmode
