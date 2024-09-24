@@ -20,10 +20,10 @@
 中文 | [English](./README_en.md)
 
 > [!TIP]
-> 已支持老版（< `v0.22.0`） 和新版（>= `v0.22.0`）两种 API，请配置 `APIVersion`
+> 已支持老版（< `v0.22.0`）和新版（>= `v0.22.0`）两种 API，请配置 `APIVersion`
 
 > [!NOTE]  
-> 如果你想把你的 Mastodon （长毛象）的嘟文嵌入到自己的网页中，你可以参考这个项目。  
+> 如果你想把你的 Mastodon（长毛象）的嘟文嵌入到自己的网页中，你可以参考这个项目。  
 > <https://github.com/eallion/mastodon-embed-timeline>
 
 ### 前端框架
@@ -53,19 +53,19 @@ git clone https://github.com/eallion/memos.top
   var memos = {
     host: 'https://demo.usememos.com/', // 修改为自己部署 Memos 的网址，末尾有 / 斜杠。
     limit: '10', // 每页显示的条数，默认显示 10 条。
-    creatorId: '1', // 老的实例是 101，新的实例是1。 https://demo.usememos.com/u/1
-    domId: '#memos', // 默认为 #memos ，一般不用修改。
+    creatorId: '1', // 老的实例是 101，新的实例是 1。https://demo.usememos.com/u/1
+    domId: '#memos', // 默认为 #memos，一般不用修改。
     username: 'memos', // 自定义显示在前端的 ID。
     name: 'Official Demo', // 自定义显示在前端的全名。
     language: 'zh-CN', // `en` `zh-CN` 等，用于显示相对时间。
-    APIVersion: 'new', // `new` 或者 `legacy`，Memos API 版本, 小于 `v0.22.0`: 填写：`legacy`，大于等于 `v0.22.0`：填写`new`。
+    APIVersion: 'new', // `new` 或者 `legacy`，Memos API 版本，小于 `v0.22.0`: 填写：`legacy`，大于等于 `v0.22.0`：填写`new`。
     total: true, // 显示 Memos 总条数。新版没有好办法显示，老版本也关闭了 Amount API。
     doubanAPI: '', // 填入一个 API 渲染豆瓣条目，不填不渲染，只显示 URL，自建 API：https://github.com/eallion/douban-api-rs
   }
 </script>
 ```
 
-##### 3. 网站图标和头像(*可选*)
+##### 3. 网站图标和头像 (*可选*)
 
 在 `assets/img` 目录中，替换成自己的图标和头像。
 
@@ -80,7 +80,7 @@ git clone https://github.com/eallion/memos.top
 
 ### 部署到 GitHub Pages
 
-> Demo: <https://www.memos.top>
+> Demo: <https://eallion.github.io/memos.top>
 
 1. Fork 本仓库
 2. 按照 #[使用方法.2](#2-设置) 设置自己的 API
@@ -88,12 +88,12 @@ git clone https://github.com/eallion/memos.top
 
 ### 部署到 Vercel
 
-> Demo: <https://memos.top>
+> Demo: <https://memos-demo.vercel.app/>
 
 1. Fork 本仓库
 2. 按照 #[使用方法.2](#2-设置) 设置自己的 API
 3. 进入自己的 Vercel 面板
-4. 新建一个 Project ，导入 GitHub 上的仓库
+4. 新建一个 Project，导入 GitHub 上的仓库
 5. 按默认设置不用改动，直接点`Deploy`
 6. 中国大陆可能需要绑定一个自定义域名才能访问 Vercel
 

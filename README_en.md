@@ -80,7 +80,7 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 
 ### Hosted by GitHub Pages
 
-> Demo: <https://www.memos.top>
+> Demo: <https://eallion.github.io/memos.top>
 
 1. Fork this
 2. Setting as #[Usage.2](#2-setting)
@@ -88,7 +88,7 @@ Upload file `index.html` and folder `assets` to your web server. Enjoy!
 
 ### Hosted by Vercel
 
-> Demo: <https://memos.top>
+> Demo: <https://memos-demo.vercel.app/>
 
 1. Fork this
 2. Setting as #[Usage.2](#2-setting)
