@@ -252,32 +252,42 @@ function updateHTMl(data) {
         // 解析内置资源文件
         if (memo.APIVersion === 'new') {
             if (data[i].resources && data[i].resources.length > 0) {
-                var resourceList = data[i].resources; // 修改为 resources
+                var resourceList = data[i].resources; 
                 var imgUrl = '', resUrl = '';
+
+                imgUrl += '<div class="resource-wrapper"><div class="images-wrapper" style="display: flex; flex-wrap: wrap; gap: 10px;">';
+
                 for (var j = 0; j < resourceList.length; j++) {
                     var resType = resourceList[j].type.slice(0, 5);
                     var resexlink = resourceList[j].externalLink;
                     var resLink = '';
                     var filename = resourceList[j].filename;
-                    var name = resourceList[j].name; // 获取资源的名称
-        
+                    var name = resourceList[j].name; 
+
                     if (resType === 'image') {
                         if (resexlink) {
-                            imgUrl += '<div class="resimg"><img loading="lazy" src="' + resexlink + '"/></div>';
+                            imgUrl += '<div class="resimg" style="flex: 1 1 calc(33.33% - 10px); overflow: hidden; position: relative; height: 200px;">' +
+                                '<img loading="lazy" src="' + resexlink + '" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>' +
+                                '</div>';
                         } else {
                             resLink = memos + '/file/' + name + '/' + filename;
-                            imgUrl += '<div class="resimg"><img loading="lazy" src="' + resLink + '"/></div>';
+                            imgUrl += '<div class="resimg" style="flex: 1 1 calc(33.33% - 10px); overflow: hidden; position: relative; height: 200px;">' +
+                                '<img loading="lazy" src="' + resLink + '" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"/>' +
+                                '</div>';
                         }
                     } else {
                         resLink = memos + '/file/' + name + '/' + filename;
                         resUrl += '<a target="_blank" rel="noreferrer" href="' + resLink + '">' + filename + '</a>';
                     }
                 }
+
+                imgUrl += '</div></div>'; 
+
                 if (imgUrl) {
-                    memoContREG += '<div class="resource-wrapper "><div class="images-wrapper">' + imgUrl + '</div></div>';
+                    memoContREG += imgUrl;
                 }
                 if (resUrl) {
-                    memoContREG += '<div class="resource-wrapper "><p class="datasource">' + resUrl + '</p></div>';
+                    memoContREG += '<div class="resource-wrapper"><p class="datasource">' + resUrl + '</p></div>';
                 }
             }
         } else if (memo.APIVersion === 'legacy') {
