@@ -330,7 +330,7 @@ function updateHTMl(data) {
             //新版自动获取头像
         } else if (memo.APIVersion === 'legacy') {
             var relativeTime = getRelativeTime(new Date(data[i].createdTs * 1000));
-            var avatarurl = '/img/avatar.jpg';
+            var avatarurl = '../img/avatar.jpg';
             //旧版自定义头像
         } else {
                 throw new Error('Invalid APIVersion');
