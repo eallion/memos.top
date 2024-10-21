@@ -178,7 +178,7 @@ blockquote {
 .memos__content:before {
     content: '';
     position: absolute;
-    background: url('/assets/img/avatar.jpg') no-repeat;
+    background: var(--avatar-url) no-repeat;
     background-size: contain;
     width: 40px;
     height: 40px;
