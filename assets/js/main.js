@@ -424,40 +424,65 @@ window.ViewImage && ViewImage.init('.container img');
 // Memos Total Start
 // Get Memos total count
 function getTotal() {
+    let pageUrl;
     let totalUrl;
     if (memo.APIVersion === 'new') {
         const filter = `creator=='users/${memo.creatorId}'&&visibilities==['PUBLIC']`;
-        totalUrl = `${memos}/api/v1/memos?pageSize=1&pageToken=&&filter=${encodeURIComponent(filter)}`;
-        fetch(totalUrl).then(res => res.json()).then(resdata => {
-            if (resdata) {
-                var allnums = resdata.memos.map(memo => {
-                    const match = memo.name.match(/\d+/);
-                    return match ? parseInt(match[0], 10) : null;
-                }).filter(num => num !== null);
-                // 不准确，但没有找到更好的办法获取总数
-                var memosCount = document.getElementById('total');
-                memosCount.innerHTML = allnums;
-            }
-        }).catch(err => {
-            // Do something for an error here
-        });
+        pageUrl = `${memos}/api/v1/memos?pageSize=1&pageToken=&&filter=${encodeURIComponent(filter)}`;
+        fetch(pageUrl)
+            .then(res => res.json())
+            .then(resdata => {
+                if (resdata && resdata.memos) {
+                    var pageSize = resdata.memos.map(memo => {
+                        const match = memo.name.match(/\d+/);
+                        return match ? parseInt(match[0], 10) : null;
+                    }).filter(num => num !== null)[0]; // 取第一个匹配到的数字
+
+                    if (pageSize) {
+                        // 第二次请求：使用获取到的 pageSize
+                        totalUrl = `${memos}/api/v1/memos?pageSize=${pageSize}&filter=${encodeURIComponent(filter)}`;
+                        return fetch(totalUrl);
+                    } else {
+                        throw new Error('No valid pageSize found');
+                    }
+                }
+            })
+            .then(res => res.json())
+            .then(resdata => {
+                if (resdata && resdata.memos) {
+                    var allnums = resdata.memos.length;
+                    var memosCount = document.getElementById('total');
+                    if (memosCount) {
+                        memosCount.innerHTML = allnums;
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching memos:', err);
+            });
     } else if (memo.APIVersion === 'legacy') {
-        totalUrl = memos + "/api/v1/memo/stats?creatorId=" + memo.creatorId
-        fetch(totalUrl).then(res => res.json()).then(resdata => {
-            if (resdata) {
-                var allnums = resdata.length
-                var memosCount = document.getElementById('total');
-                memosCount.innerHTML = allnums;
-            }
-        }).catch(err => {
-            // Do something for an error here
-        });
+        totalUrl = `${memos}/api/v1/memo/stats?creatorId=${memo.creatorId}`;
+        fetch(totalUrl)
+            .then(res => res.json())
+            .then(resdata => {
+                if (resdata) {
+                    var allnums = resdata.length;
+                    var memosCount = document.getElementById('total');
+                    if (memosCount) {
+                        memosCount.innerHTML = allnums;
+                    }
+                }
+            })
+            .catch(err => {
+                console.error('Error fetching memos:', err);
+            });
     } else {
         throw new Error('Invalid APIVersion');
     }
-};
+}
+
 if (memo.total === true) {
-    window.onload = getTotal();
+    window.onload = getTotal;
 } else {
     var totalDiv = document.querySelector('div.total');
     if (totalDiv) {
