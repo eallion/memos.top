@@ -20,13 +20,6 @@
 English | [中文](./README.md)
 
 > [!TIP]
-> CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
-
-[Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
-
-[![](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)](https://edgeone.ai/zh?from=github)
-
-> [!TIP]
 > Support legacy API (< `v0.22.0`) and new API ( >= `v0.22.0` ), Please set `APIVersion`
 
 > [!NOTE]  
@@ -171,6 +164,13 @@ https://movie.douban.com/subject/1889243/
 ```
 
 </details>
+
+> [!TIP]
+> CDN acceleration and security protection for this project are sponsored by Tencent EdgeOne.
+
+[Best Asian CDN, Edge, and Secure Solutions - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
+
+[![](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)](https://edgeone.ai/zh?from=github)
 
 ### [LICENSE GLWTPL](https://github.com/me-shaon/GLWTPL)
 
