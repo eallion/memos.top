@@ -29,7 +29,8 @@ var memos = memo.host.replace(/\/$/, '')
 let memoUrl;
 if (memo.APIVersion === 'new') {
     const filter = `creator=='users/${memo.creatorId}'&&visibilities==['PUBLIC']`;
-    memoUrl = `${memos}/api/v1/memos?filter=${encodeURIComponent(filter)}&view=MEMO_VIEW_FULL`;
+    // memoUrl = `${memos}/api/v1/memos?filter=${encodeURIComponent(filter)}&view=MEMO_VIEW_FULL`;
+    memoUrl = `${memos}/api/v1/memos?parent=users/${memo.creatorId}`;
 } else if (memo.APIVersion === 'legacy') {
     memoUrl = memos + "/api/v1/memo?creatorId=" + memo.creatorId + "&rowStatus=NORMAL";
 } else {
@@ -326,7 +327,7 @@ function updateHTMl(data) {
         }
         if (memo.APIVersion === 'new') {
             var relativeTime = getRelativeTime(new Date(data[i].createTime));
-            var avatarurl = memo.host + 'file/users/' + memo.creatorId + '/avatar'; 
+            var avatarurl = memo.host + 'api/v1/users/' + memo.creatorId + '/avatar'; 
             //新版自动获取头像
         } else if (memo.APIVersion === 'legacy') {
             var relativeTime = getRelativeTime(new Date(data[i].createdTs * 1000));
@@ -427,34 +428,19 @@ function getTotal() {
     let pageUrl;
     let totalUrl;
     if (memo.APIVersion === 'new') {
-        const filter = `creator=='users/${memo.creatorId}'&&visibilities==['PUBLIC']`;
-        pageUrl = `${memos}/api/v1/memos?pageSize=1&pageToken=&&filter=${encodeURIComponent(filter)}`;
+        pageUrl = `${memos}/api/v1/users/${memo.creatorId}:getStats`;
         fetch(pageUrl)
             .then(res => res.json())
             .then(resdata => {
-                if (resdata && resdata.memos) {
-                    var pageSize = resdata.memos.map(memo => {
-                        const match = memo.name.match(/\d+/);
-                        return match ? parseInt(match[0], 10) : null;
-                    }).filter(num => num !== null)[0]; // 取第一个匹配到的数字
-
-                    if (pageSize) {
-                        // 第二次请求：使用获取到的 pageSize
-                        totalUrl = `${memos}/api/v1/memos?pageSize=${pageSize}&filter=${encodeURIComponent(filter)}`;
-                        return fetch(totalUrl);
-                    } else {
-                        throw new Error('No valid pageSize found');
-                    }
-                }
-            })
-            .then(res => res.json())
-            .then(resdata => {
-                if (resdata && resdata.memos) {
-                    var allnums = resdata.memos.length;
+                // 直接使用返回数据中的 totalMemoCount 字段
+                if (resdata && resdata.totalMemoCount !== undefined) {
+                    var allnums = resdata.totalMemoCount;
                     var memosCount = document.getElementById('total');
                     if (memosCount) {
                         memosCount.innerHTML = allnums;
                     }
+                } else {
+                    throw new Error('No valid totalMemoCount found');
                 }
             })
             .catch(err => {

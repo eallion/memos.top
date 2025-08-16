@@ -20,7 +20,7 @@
 English | [中文](./README.md)
 
 > [!TIP]
-> Support legacy API (< `v0.22.0`) and new API ( >= `v0.22.0` ), Please set `APIVersion`
+> Support legacy API (< `v0.25.0`) and new API ( >= `v0.25.0` ), Please set `APIVersion`
 
 > [!NOTE]  
 > If you're looking to embed your Mastodon toots on your website, you might want to check out this project.  
@@ -58,7 +58,7 @@ Replace the default value in `index.html`:
     username: 'memos',  // You can customize the display ID that is not related to memos.
     name: 'Official Demo',  // You can customize the displayed full name, that is not related to memos.
     language: 'en', // `en` `zh-CN` etc. Used by Relative Time.
-    APIVersion: 'new', // `new` or `legacy`, Memos API Version, <`v0.22.0`: `legacy`, >=`v0.22.0`: `new`.
+    APIVersion: 'new', // `new` or `legacy`, Memos API Version, <`v0.25.0`: `legacy`, >=`v0.25.0`: `new`.
     total: true, // Display total memos. No interface is displayed in the new version.
     doubanAPI: '', // Fill a API to render douban subject. `null` to disable. API self-hosted: https://github.com/eallion/douban-api-rs
   }

@@ -20,7 +20,7 @@
 中文 | [English](./README_en.md)
 
 > [!TIP]
-> 已支持老版（< `v0.22.0`）和新版（>= `v0.22.0`）两种 API，请配置 `APIVersion`
+> 已支持老版（< `v0.25.0`）和新版（>= `v0.25.0`）两种 API，请配置 `APIVersion`
 
 > [!NOTE]  
 > 如果你想把你的 Mastodon（长毛象）的嘟文嵌入到自己的网页中，你可以参考这个项目。  
@@ -58,7 +58,7 @@ git clone https://github.com/eallion/memos.top
     username: 'memos', // 自定义显示在前端的 ID。
     name: 'Official Demo', // 自定义显示在前端的全名。
     language: 'zh-CN', // `en` `zh-CN` 等，用于显示相对时间。
-    APIVersion: 'new', // `new` 或者 `legacy`，Memos API 版本，小于 `v0.22.0`: 填写：`legacy`，大于等于 `v0.22.0`：填写`new`。
+    APIVersion: 'new', // `new` 或者 `legacy`，Memos API 版本，小于 `v0.25.0`: 填写：`legacy`，大于等于 `v0.25.0`：填写`new`。
     total: true, // 显示 Memos 总条数。新版没有好办法显示，老版本也关闭了 Amount API。
     doubanAPI: '', // 填入一个 API 渲染豆瓣条目，不填不渲染，只显示 URL，自建 API：https://github.com/eallion/douban-api-rs
   }
@@ -170,7 +170,6 @@ https://movie.douban.com/subject/1889243/
 [亚洲最佳 CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
 
 [![](https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png)](https://edgeone.ai/zh?from=github)
-
 
 ### [许可证 GLWTPL](https://github.com/me-shaon/GLWTPL)
 
